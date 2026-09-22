@@ -1,0 +1,36 @@
+{
+  "dependencies": {
+    "dotenv": "^18.0.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.10.2",
+    "node": "^26.9.0"
+  },
+  "devDependencies": {
+    "jest": "^30.5.2",
+    "nodemon": "^3.1.14",
+    "supertest": "^7.3.0"
+  },
+  "name": "fakemon-api",
+  "version": "1.0.1",
+  "description": "A site where creative pokemon lovers post and view fakemon creations from anyone",
+  "main": "app.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "nodemon src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaisahPark1/fakemon-api.git"
+  },
+  "keywords": [],
+  "author": "Josiah_Park <jpark277@west-mec.org> (https://github.com/SaisahPark1)",
+  "license": "MIT",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/SaisahPark1/fakemon-api/issues"
+  },
+  "homepage": "https://github.com/SaisahPark1/fakemon-api#readme"
+}

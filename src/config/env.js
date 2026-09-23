@@ -5,7 +5,7 @@ const missing = REQUIRED.filter((key) => !process.env[key])
 // Built aboce is a set of rules to check and report required ENV variables and what is missing
 
 if (missing.length > 0){
-    console.log(`Missing required enviornment variable(s): ${missing.join(', ')}`)
+    console.log(`Missing required environment variable(s): ${missing.join(', ')}`)
     process.exit(1)
 }
 

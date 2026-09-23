@@ -3,13 +3,11 @@ const mongoose = require('mongoose')
 
 // Remember that the schema is the blue print for a record in the database and is used to validate new record data
 const fakemonSchema = new mongoose.Schema({
-    nickname: {type: String, required:true},
+    name: {type: String, required:true},
     id:{type: Number, required: true},
-    species:{type: String, default:"Unknown"},
-    location: {type: String, required:true},
-    wateringIntervalDays: {type:Number, required:true},
-    lastWateredAt: {type: Date, default:null},
-    status: {type: String, default: "healthy"}
+    types:{type: Array, required: true},
+    description:{type: String, required: true},
+    image: {type: String, required: true},
 },{timestamps: true})
 // model for a fakemon
 const Fakemon = mongoose.model("Fakemon", fakemonSchema)
@@ -51,7 +49,7 @@ app.get('/fakemon/:id', async (req, res) => {
         res.status(200).json(fakemon)
         // If the condition succeeds :)
     } catch (error) {
-        res.status(500).json({error: "Fakemon not Found"})
+        res.status(500).json({error: "Can't get /fakemon/number"})
     }
 })
 

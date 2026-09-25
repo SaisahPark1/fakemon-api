@@ -1,5 +1,5 @@
 function notFound(req, res){
-    res.status(404).json({error:{code:'NOT FOUND', message: 'Route not Found, YA SUCKA'}})
+    res.status(404).json({error:{code:'NOT FOUND', message: 'Route not Found :('}})
 }
 
 function errorHandler(err, req, res, next){

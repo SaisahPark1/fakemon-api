@@ -1,10 +1,18 @@
-const Fakemon = require('../models/resource.model.js')
+const Fakemon = require('../models/fakemon.model.js')
 
 nextId = 1
 
 async function create(req, res){
-    const fakemon = await Fakemon.create({id:String(nextId++), ...req.body})
-    res.status(201).json(fakemon)
+    try{
+        const fakemon = await Fakemon.create({...req.body, id:String(nextId++)})
+        res.status(201).json(fakemon)
+    } catch (error){
+        if (error.name === 'ValidationError') {
+            res.status(400).json({error: `You forgot something! ${error.message}`});
+        } else {
+            res.status(500).json({error: error.message});
+        }
+    }
 }
 
 async function findAll(req, res){
@@ -37,7 +45,7 @@ async function findById(req, res){
 
 async function update(req, res){
     try{
-        const fakemon = await Fakemon.findOneAndUpdate({id:Number(req.params.id)}, req.body)
+        const fakemon = await Fakemon.findOneAndUpdate({id:Number(req.params.id)}, req.body, {new: true, runValidators: true})
         // find the specific fakemon record
         if(!fakemon) return res.status(404).json({error: "Fakemon Not Found"})
         // If there is none with the id
@@ -62,4 +70,12 @@ async function remove(req, res){
     }
 }
 
-module.exports = {update, findAll, findById, create, remove}
+async function getHealth(req, res){
+    try{
+        res.status(200).json({ok:true, uptime: Math.round(process.uptime())})
+    } catch (error) {
+        res.status(500).json({error: error.message})
+    }
+}
+
+module.exports = {update, findAll, findById, create, remove, getHealth}

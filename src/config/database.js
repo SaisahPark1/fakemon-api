@@ -2,7 +2,6 @@
 
 const mongoose = require('mongoose')
 const {mongoUri} = require('./env.js');
-const { errorMonitor } = require('node:events');
 
 // mongoose by default will always auto reconnect after a network outage or issue. If you're not using listeners or trackers you and your code will have no clue it happened and have no way to account for the loss in connection
 

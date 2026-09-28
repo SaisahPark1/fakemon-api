@@ -24,3 +24,11 @@ Create a .env file and put in MONGODB_URI='the mongodb uri', PORT=5500, and NODE
 
 Run with:
 npm run dev
+
+MAKE SURE TO NOTE!
+You can edit your access inside middleware.js
+
+ROUTES turns the url into the actual functions
+CONTROLLERS dfines the functions and calls services
+SERVICES defines which roles can do which actions
+The DATABASE finally gets updated when all the above things work out.

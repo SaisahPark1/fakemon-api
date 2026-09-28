@@ -5,7 +5,7 @@ function notFound(req, res){
 function errorHandler(err, req, res, next){
     const status = err.status ?? 500
     if (status >= 500)
-        console.error(err)
+        console.error("Dumb Programmer Error: ", err)
     res.status(status).json({
         error:{
             code:err.code ?? 'INTERNAL_ERROR',
@@ -28,4 +28,13 @@ function requestLogger(req, res, next) {
     next()
 }
 
-module.exports = {notFound, errorHandler, requestLogger}
+function fakeAuth(req, res, next) {
+    req.user = {
+        id: 1,
+        role: 'moderator'
+    }
+
+    next()
+}
+
+module.exports = {notFound, errorHandler, requestLogger, fakeAuth}

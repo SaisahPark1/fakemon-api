@@ -33,7 +33,6 @@ function fakeAuth(req, res, next) {
         id: 1,
         role: 'admin'
     }
-
     next()
 }
 

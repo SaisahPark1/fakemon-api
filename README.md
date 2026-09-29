@@ -32,3 +32,9 @@ ROUTES turns the url into the actual functions
 CONTROLLERS dfines the functions and calls services
 SERVICES defines which roles can do which actions
 The DATABASE finally gets updated when all the above things work out.
+
+The Chosen Challenges:
+Challenge 1: Pagination
+Challenge 4: Soft Delete
+
+Stage 2 Authentication is already set up well with services and roles already established

@@ -17,7 +17,8 @@ const fakemonSchema = new mongoose.Schema({
     image: {type: String, required: true},
     postedOn: {type: Date, default: new Date()},
     likes: {type: Number, default: 0},
-    flags: {type: Number, default: 0}
+    flags: {type: Number, default: 0},
+    deletedAt: {type: Date, default: null}
 },{timestamps: true})
 
 module.exports = mongoose.model('Fakemon', fakemonSchema)

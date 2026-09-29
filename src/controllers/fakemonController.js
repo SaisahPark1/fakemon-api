@@ -27,10 +27,16 @@ async function create(req, res) {
 
 async function findAll(req, res) {
     try {
+        const page = Number(req.query.page) || 1
+        const limit = Number(req.query.limit) || 10
+
+        if (page < 1 || limit < 1 || limit > 100){ return res.status(400).json({error: 'Page must be > 0 and limit must be > 0 < 101'})}
+
         const fakemons = await FakemonService.serviceFindAll(
+            page,
+            limit,
             req.user
         )
-
         return res.status(200).json(fakemons)
 
     } catch (error) {

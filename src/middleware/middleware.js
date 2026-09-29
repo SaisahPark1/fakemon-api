@@ -31,7 +31,7 @@ function requestLogger(req, res, next) {
 function fakeAuth(req, res, next) {
     req.user = {
         id: 1,
-        role: 'moderator'
+        role: 'admin'
     }
 
     next()

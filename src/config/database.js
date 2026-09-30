@@ -13,6 +13,11 @@ function attachListeners(){
     listenersAttached = true
     mongoose.connection.on('connected', () => {
         console.log(`MongoDB Connected: ${mongoose.connection.name}`)
+        console.log('Host:', mongoose.connection.host)
+        console.log(
+            'Collections:',
+            Object.keys(mongoose.connection.collections)
+        )
     })
     mongoose.connection.on('error', () => {
         console.log(`MongoDB Error: ${errorMonitor.message}`)

@@ -12,6 +12,10 @@ function requireRole(user, allowedRoles) {
 }
 
 async function serviceCreate(data, user) {
+    console.log('SERVICE RECEIVED:')
+    console.log(data)
+    console.log('TYPES:', data.types)
+    console.log('TYPE OF TYPES:', typeof data.types)
     requireRole(user, ['admin', 'moderator'])
 
     return Fakemon.create(data)

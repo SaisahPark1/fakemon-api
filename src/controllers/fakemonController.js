@@ -1,4 +1,5 @@
 const FakemonService = require('../services/resource.service.js')
+const {PAGINATION} = require('../config/constants.js')
 
 let nextId = 1
 
@@ -27,11 +28,15 @@ async function create(req, res) {
 
 async function findAll(req, res) {
     try {
-        const page = Number(req.query.page) || 1
-        const limit = Number(req.query.limit) || 10
-
-        if (page < 1 || limit < 1 || limit > 100){ return res.status(400).json({error: 'Page must be > 0 and limit must be > 0 < 101'})}
-
+        let limit
+        const page = Number(req.query.page) || PAGINATION.DEFAULT_PAGE
+        if(Number(req.query.limit)||0 < 1){
+            limit = PAGINATION.DEFAULT_LIMIT
+        } else if (Number(req.query.limit)||0 > PAGINATION.MAX_LIMIT){
+            limit = PAGINATION.MAX_LIMIT
+        } else {
+            limit = Number(req.query.limit)
+        }
         const fakemons = await FakemonService.serviceFindAll(
             page,
             limit,

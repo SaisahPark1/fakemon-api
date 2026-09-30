@@ -18,7 +18,8 @@
     "test": "tests"
   },
   "scripts": {
-    "dev": "nodemon src/server.js"
+    "dev": "nodemon src/server.js",
+    "kill-port": "npx kill-port 5500"
   },
   "repository": {
     "type": "git",

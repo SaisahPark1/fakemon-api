@@ -15,6 +15,7 @@ function errorHandler(err, req, res, next){
 }
 
 function requestLogger(req, res, next) {
+    console.log("requestLogger running")
     const start = Date.now()
 
     res.on('finish', () => {

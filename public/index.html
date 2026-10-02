@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fakemon Posts</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="view">
+        <button id="button-any" class="pressed" onclick='loadAnyFakemon()'>View creations!</button>
+        <button id="button-fav" class="unpressed" onclick="loadFavorites()">View your favorites!</button>
+        <button id="create" class="unpressed">Post your own!</button>
+        <button id="creations" class="unpressed">View your own creations!</button>
+    </div>
+    <select>
+        <option value="date1">Date Newest</option>
+        <option value="date-1">Date Oldest</option>
+        <option value="liked1">Most liked</option>
+        <option value="liked-1">Least liked I guess</option>
+    </select>
+
+    <div class="container visible" id="any-fakemon-holder">
+        <div class="card" id="any-fakemon">
+            <img src="" alt="fakemon-image" id="image">
+            <h2 id="name">example</h2>
+        </div>
+        <div id="no-any">
+            <h1>Uh-Oh! No fakemon yet!</h1>
+        </div>
+    </div>
+    <div class="container invisible" id="fav-fakemon-holder">
+        <div class="card" id="fav-fakemon">
+            <img src="" alt="fakemon-image" id="image">
+            <h2 id="name">example</h2>
+        </div>
+        <div id="no-fav">
+            <h1>Uh-Oh! No favorites yet!</h1>
+        </div>
+    </div>
+    <script src="./script.js"></script>
+</body>
+</html>

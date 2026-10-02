@@ -1,0 +1,62 @@
+body{
+    background-color: black;
+    margin: 1rem;
+    padding: 1rem;
+}
+
+.card{
+    background-color: blueviolet;
+    border: .5rem solid black;
+    border-radius: 1rem;
+    box-shadow: 1rem;
+    margin: 1rem;
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    width: 15rem;
+    height: 15rem;
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#example{
+    display: none;
+}
+
+.view{
+    display: flex;
+    padding: 2rem;
+    background-color: rgb(46, 35, 35);
+    justify-content: space-around;
+}
+
+button{
+    margin: 1rem;
+    width: 10rem;
+    height: 6rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+}
+button.unpressed{
+    background-color: rgb(100, 118, 223);
+}
+button.pressed{
+    background-color: rgb(11, 255, 76);
+}
+
+.invisible{
+    display: none;
+}
+.visible{
+    display: flex;
+}
+
+#no-any, #no-fav{
+    background-color: blueviolet;
+}

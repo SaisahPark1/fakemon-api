@@ -6,6 +6,9 @@ const Fakemon = require('./models/fakemon.model.js')
 
 app = express()
 
+const path = require('path')
+app.use(express.static(path.join(__dirname, '..', 'public')))
+
 function createApp(){
     app.use((req, res, next) => { res.setHeader('X-Served-By', process.pid); next() })
     console.log("server pid:", process.pid)

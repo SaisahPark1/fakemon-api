@@ -21,7 +21,7 @@ const fakemonSchema = new mongoose.Schema({
     },
     description:{type: String, required: true, minlength: 1, maxlength: 250},
     image: {type: String, required: true},
-    postedOn: {type: Date, default: new Date()},
+    postedOn: {type: Date, default: new Date(), index: true},
     likes: {type: Number, default: 0},
     flags: {type: Number, default: 0},
     deletedAt: {type: Date, default: null},

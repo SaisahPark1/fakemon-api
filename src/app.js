@@ -1,19 +1,18 @@
-const fakemonRoutes = require('./routes/routes.js')
-const { notFound, errorHandler, requestLogger, fakeAuth} = require('./middleware/middleware.js')
+const fakemonRoutes = require('./routes/fakemon.routes.js')
+const requestLogger = require('./middleware/requestLogger')
+const notFound = require('./middleware/notFound')
+const errorHandler = require('./middleware/errorHandler')
 const express = require('express')
 const {API_PREFIX} = require('./config/constants.js')
-const Fakemon = require('./models/fakemon.model.js')
+const path = require('path')
 
 app = express()
 
-const path = require('path')
-app.use(express.static(path.join(__dirname, '..', 'public')))
-
 function createApp(){
+    app.use(express.static(path.join(__dirname, '..', 'public')))
     app.use((req, res, next) => { res.setHeader('X-Served-By', process.pid); next() })
     console.log("server pid:", process.pid)
     app.use(requestLogger)
-    app.use(fakeAuth)
     app.use(express.json({limit:'10kb'})) // because data structure or type was chosen the raw data could not be comprehended by the middleware
     app.use(API_PREFIX, fakemonRoutes)
     // express.json() reads the request stream, parses it onto the req.body

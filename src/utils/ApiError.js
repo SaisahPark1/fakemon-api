@@ -1,4 +1,4 @@
-class apiError extends error{
+class apiError extends Error{
     constructor(statusCode, message, details = null){
         super(message)
         this.statusCode = statusCode

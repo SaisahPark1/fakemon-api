@@ -9,7 +9,7 @@
 <body>
     <div class="view">
         <button id="button-any" class="pressed" onclick='loadAnyFakemon()'>View creations!</button>
-        <button id="button-fav" class="unpressed" onclick="">View your favorites!</button>
+        <button id="button-fav" class="unpressed" onclick="loadFavorites()">View your favorites!</button>
         <button id="create" class="unpressed">Post your own!</button>
         <button id="creations" class="unpressed">View your own creations!</button>
     </div>
@@ -20,15 +20,15 @@
         <option value="liked-1">Least liked I guess</option>
     </select>
 
-    <div class="container visible" id="fakemon-holder">
+    <div class="container invisible" id="fakemon-holder">
         <div class="card" id="fakemon">
             <img src="" alt="fakemon-image" id="image">
             <h2 id="name">example</h2>
         </div>
-        <div id="no-any">
-            <h1>Uh-Oh! No fakemon yet!</h1>
+        <div id="no-fav">
+            <h1>Uh-Oh! No favorites yet!</h1>
         </div>
     </div>
-    <script type="module" src="./home.js"></script>
+    <script type="module" src="./favorites.js"></script>
 </body>
 </html>

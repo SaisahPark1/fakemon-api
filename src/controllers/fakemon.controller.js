@@ -7,7 +7,7 @@ const apiError = require('../utils/apiError')
 const {PAGINATION} = require('../config/constants')
 
 
-const getAllFakemon = asyncHandler(async(req, res, next)=>{
+const getAllFakemon = asyncHandler(async(req, res)=>{
     try{
         const page = Math.max(parseInt(req.query.page) || 1, 1)
         const limit = Math.min(Math.max(parseInt(req.query.limit) || PAGINATION.DEFAULT_LIMIT, 1), PAGINATION.MAX_LIMIT)
@@ -18,10 +18,7 @@ const getAllFakemon = asyncHandler(async(req, res, next)=>{
             Fakemon.countDocuments()
         ])
 
-        res.json({
-            data,
-            meta: { page, limit, total, totalPages: Math.ceil(total / limit) }
-        })
+        sendSuccess(res, data)
     } catch (error) {
         res.status(500).json({success:false, error:error})
     }

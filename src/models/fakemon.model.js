@@ -3,7 +3,6 @@ const {TYPES} = require('../config/constants.js')
 // Remember that the schema is the blue print for a record in the database and is used to validate new record data
 const fakemonSchema = new mongoose.Schema({
     name: {type: String, required: [true, 'MUST HAVE A NAME'], minlength: [1, "Name must be at least one character long"], maxlength: [25, "Name can't be more than 25 characters"]},
-    id:{type: Number, required: true},
     types: {
         type: [{
             type: String,

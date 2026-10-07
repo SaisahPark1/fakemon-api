@@ -1,9 +1,19 @@
 const {connectDatabase, disconnectDatabase} = require('./config/database.js')
 const {port} = require('./config/env.js')
 const app = require('./app.js')()
+const mock = require('../postman/MOCK_DATA.json')
+const Fakemon = require('./models/fakemon.model.js')
 
 async function start(){
     await connectDatabase()
+
+    try {
+        const result = await Fakemon.insertMany(mock, { ordered: false })
+        console.log(`Inserted ${result.length}`)
+    } catch (err) {
+        console.error(err.message)
+    }
+
     const server = app
     if (!port) throw new Error('PORT is not set. Check your .env')
     server.listen(port,()=> console.log(`Listening on port: http://localhost:${port}`))

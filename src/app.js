@@ -1,4 +1,4 @@
-const fakemonRoutes = require('./routes/fakemon.routes.js')
+const fakemonRoutes = require('./routes/index.js')
 const requestLogger = require('./middleware/requestLogger')
 const notFound = require('./middleware/notFound')
 const errorHandler = require('./middleware/errorHandler')

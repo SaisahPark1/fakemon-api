@@ -7,7 +7,7 @@ const SORTABLE_FIELDS = Object.freeze([
 ])
 
 const PAGINATION = Object.freeze({
-    DEFAULT_PAGE: 1, DEFAULT_LIMIT:20, MAX_LIMIT:100
+    DEFAULT_LIMIT:20, MAX_LIMIT:100
 })
 
 const API_PREFIX = '/api/v1'

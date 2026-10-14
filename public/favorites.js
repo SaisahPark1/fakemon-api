@@ -1,4 +1,3 @@
-const {API_PREFIX} = require('../src/config/constants')
-const {loadStuff} = require('./shared.js')
+import { loadStuff } from './shared.js'
 
 loadStuff('/fakemon/favorites')

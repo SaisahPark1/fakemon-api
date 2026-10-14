@@ -1,19 +1,18 @@
-prefix = '/api/v1'
+const prefix = '/api/v1'
 
-module.exports = async function loadStuff(route){
+export async function loadStuff(route){
     const res = await fetch(prefix+route)
     if (!res.ok) throw new Error(`Request failed: ${res.status}`)
 
     const body = await res.json()
-    const fakemon = body.data    // your response is { "data": ... }
+    const fakemon = body.data    // response is { "data": ... }
 
     const container = document.getElementById('fakemon-holder');
     const first = container.firstElementChild;
-    container.innerHTML = '';
     container.appendChild(first);
 
     if (fakemon.length > 0){
-        document.getElementById("no-any").style.display = 'none';
+        document.getElementById("no-fakemon").style.display = 'none';
     }
 
     for (const mon of fakemon) {

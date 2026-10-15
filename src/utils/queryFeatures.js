@@ -95,19 +95,8 @@ function escapeRegex(text){
 
 function buildFakemonFilter(){
     const filter = {}
-    if(query.type){
-        if(!TYPES.includes(query.type)){
-            throw apiError.badRequest(`'${query.type}' is not a supported type. Valid: ${TYPES.join(', ')}`)
-            // ERRORS if the request isn't in the list!
-        }
-        filter.status = query.status
-    }
-    if(query.location){
-        if(!PLANT_LOCATIONS.includes(query.location)){
-            throw apiError.badRequest(`'${query.location}' is not a supported location. Valid: ${LOCATIONS.join(', ')}`)
-            // ERRORS if the request isn't in the list!
-        }
-        filter.location = query.location
+    if(query.name){
+        filter.name = query.name
     }
     if (query.q){
         // 'i' is for case insensitive
@@ -117,4 +106,4 @@ function buildFakemonFilter(){
     return filter
 }
 
-module.exports = {parsePagination, parseSort, buildMeta, buildPlantFilter, escapeRegex}
+module.exports = {parsePagination, parseSort, buildMeta, buildFakemonFilter, escapeRegex}

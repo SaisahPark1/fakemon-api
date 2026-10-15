@@ -4,24 +4,31 @@ const asyncHandler = require('../utils/asyncHandler')
 const {sendSuccess, sendCreated, sendNoContent} = require('../utils/apiResponse')
 const Fakemon = require('../models/fakemon.model')
 const apiError = require('../utils/apiError')
-const {PAGINATION} = require('../config/constants')
+const {parsePagination, parseSort, buildMeta, buildPlantFilter} = require('../utils/queryFeatures.js')
 
+const WRITABLE_FIELDS = ["name", 'types', 'image', 'description']
+// DOESN'T INCLUDE dates, ownership variables, or ids
 
-const getAllFakemon = asyncHandler(async(req, res)=>{
-    try{
-        const page = Math.max(parseInt(req.query.page) || 1, 1)
-        const limit = Math.min(Math.max(parseInt(req.query.limit) || PAGINATION.DEFAULT_LIMIT, 1), PAGINATION.MAX_LIMIT)
-        const skip = (page - 1) * limit
-
-        const [data, total] = await Promise.all([
-            Fakemon.find().sort({ createdAt: -1, _id: -1 }).skip(skip).limit(limit),
-            Fakemon.countDocuments()
-        ])
-
-        sendSuccess(res, data)
-    } catch (error) {
-        res.status(500).json({success:false, error:error})
+function pickWritableFields(body={}){
+    const payload = {}
+    for (const field of WRITABLE_FIELDS){
+        if(body[field] !== undefined) payload[field] = body[field]
     }
+    return payload
+}
+
+const getFakemonStats = asyncHandler(async(req, res)=>{
+    const [total, grouped, all] = await Promise.all([
+        Fakemon.countDocuments(),
+        Fakemon.aggregate([{$group: {id: 'status', count: {$sum: 1}}}]),
+        Fakemon.find({status: {$ne: PLANT_STATUS.RETIRED}})
+    ])
+    
+    const byStatus = grouped.reduce((acc, row)=>({
+        ...acc, [row.id]: row.count
+    }), {})
+    const overdue = all.filter((plant)=> plant.isOverdue).length()
+    sendSuccess(res, {total,byStatus,overdue})
 })
 
 // GET /api/v1/fakemon/:id

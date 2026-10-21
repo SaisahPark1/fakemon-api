@@ -1,30 +1,31 @@
-const fakemonRoutes = require('./routes/index.js')
+const express = require('express')
+const routes = require('./routes')
+const healthRoutes = require('./routes/health.routes')
 const requestLogger = require('./middleware/requestLogger')
 const notFound = require('./middleware/notFound')
 const errorHandler = require('./middleware/errorHandler')
-const express = require('express')
-const {API_PREFIX} = require('./config/constants.js')
-const path = require('path')
+const { API_PREFIX } = require('./config/constants')
 
-app = express()
+/**
+ * This will build the express application and start the base database connection and application
+ * 
+ * the order for middleware packet processing is:
+ * logger -> bodyparser -> health -> API Routes -> 404 -> Error Handler
+ */
 
-function createApp(){
-    app.use(express.static(path.join(__dirname, '..', 'public')))
-    app.use((req, res, next) => { res.setHeader('X-Served-By', process.pid); next() })
-    console.log("server pid:", process.pid)
-    app.use(requestLogger)
-    app.use(express.json({limit:'10kb'})) // because data structure or type was chosen the raw data could not be comprehended by the middleware
-    app.use(API_PREFIX, fakemonRoutes)
-    // express.json() reads the request stream, parses it onto the req.body
+const app = express()
+// REMEMBER: ORDER MATTERS
 
-    // This is an industry standard pathway checking the health of the application! It is mandatory!
-    // app.get('/boom',()=>{
-    //     throw new Error("kaboom")
-    // })
-    app.use(notFound)
-    app.use(errorHandler)
+app.use(requestLogger)
+app.use(express.json({limit: '10kb'}))
+app.use(express.urlencoded({extended: true, limit: '10kb'}))
 
-    return app
-}
+// Routing for pathways
+app.use('/health', healthRoutes)
+app.use(API_PREFIX, routes)
 
-module.exports = createApp
+// Routing for errors
+app.use(notFound)
+app.use(errorHandler)
+
+module.exports = app

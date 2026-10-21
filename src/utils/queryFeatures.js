@@ -62,7 +62,7 @@ function parseSort(sortParam){
  * @param {{page: number, limit: number, total: number}} args
  */
 
-function buildMeta(){
+function buildMeta({page, limit, total}){
     const totalPages = limit > 0 ? Math.ceil(total/limit) : 0
 
     return{
@@ -93,7 +93,7 @@ function escapeRegex(text){
  * @throws {apiError}
  */
 
-function buildFakemonFilter(){
+function buildFakemonFilter(query={}){
     const filter = {}
     if(query.name){
         filter.name = query.name

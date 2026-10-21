@@ -2,13 +2,14 @@
 
 const express = require('express')
 const fakemonController = require('../controllers/fakemon.controller')
+const {requireAuth} = require('../middleware/auth.js')
 
 const router = express.Router()
 
 router
     .route('/')
         .get(fakemonController.getAllFakemon)
-        .post(fakemonController.createFakemon)
+        .post(requireAuth, fakemonController.createFakemon)
 router
     .route('/:id')
         .get(fakemonController.getOneFakemon)

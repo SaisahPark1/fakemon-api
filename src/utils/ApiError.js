@@ -19,8 +19,8 @@ class apiError extends Error{
     }
 
     // 401: We don't know you. Log in please
-    static unauthorized(message = 'Unauthorized', details = null){
-        return new apiError(404, message, details)
+    static unauthenticated(message = 'Unauthenticated', details = null){
+        return new apiError(401, message, details)
     }
 
     // 403: We know you and you are forbidden

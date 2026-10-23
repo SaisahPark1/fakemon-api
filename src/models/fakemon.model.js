@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const {TYPES} = require('../config/constants.js')
+const userModel = require('./user.model.js')
 // Remember that the schema is the blue print for a record in the database and is used to validate new record data
 const fakemonSchema = new mongoose.Schema({
     name: {type: String, required: [true, 'MUST HAVE A NAME'], minlength: [1, "Name must be at least one character long"], maxlength: [25, "Name can't be more than 25 characters"]},
@@ -24,7 +25,7 @@ const fakemonSchema = new mongoose.Schema({
     likes: {type: Number, default: 0},
     flags: {type: Number, default: 0},
     deletedAt: {type: Date, default: null},
-    owner: {type: String, default: "Not Implemented"}
+    ownerId: {type: String, default: "N/A", required: true}
 },{timestamps: true})
 
 module.exports = mongoose.model('Fakemon', fakemonSchema)

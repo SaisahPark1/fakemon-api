@@ -32,7 +32,7 @@ const login = asyncHandler(async(req, res)=>{
     // .select('+password') overrides the hashing
 
     if ((!user) || !(await user.comparePassword(password))){
-        throw apiError.unauthorized('Invalid email or password')
+        throw apiError.unauthenticated('Invalid email or password')
     }
     // making sure that the user exists and the passwords match
 

@@ -14,6 +14,7 @@
 
 const jwt = require('jsonwebtoken')
 const {jwtSecret, jwtExpiresIn} = require('../config/env.js')
+const apiError = require('../utils/apiError.js')
 
 function signToken(user){
     /**
@@ -40,7 +41,7 @@ function verifyToken(token){
         /** this error covers forged signatures signed with a different secret!
          * DON'T be too detailed with the error response or hackers will use it
         */
-       throw apiError.unauthorized('Invalid Token')
+       throw apiError.unauthenticated('Invalid Token')
     }
 }
 

@@ -13,9 +13,9 @@ router
 router
     .route('/:id')
         .get(fakemonController.getOneFakemon)
-        .put(fakemonController.updateFakemon)
-        .patch(fakemonController.updateFakemon)
-        .delete(fakemonController.removeFakemon)
+        .put(requireAuth, fakemonController.updateFakemon)
+        .patch(requireAuth, fakemonController.updateFakemon)
+        .delete(requireAuth, fakemonController.removeFakemon)
 
 // Here there will be more routes each with their own combination of get,put,patch,delete...etc
 

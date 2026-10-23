@@ -62,7 +62,7 @@ const createFakemon = asyncHandler(async(req, res) => {
     // This is the line plant.model.js is looking for :)
     const fakemon = await Fakemon.create({
         ...pickWritableFields(req.body),
-        ownerId: req.user._id
+        ownerId: req.user.id
     })
     sendCreated(res,fakemon)
 })

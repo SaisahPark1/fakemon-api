@@ -4,7 +4,7 @@
 
 const asynHandler = require('../utils/asyncHandler.js')
 const {sendSuccess, sendCreated} = require('../utils/apiResponse.js')
-const apiError = require('../utils/apiError.js')
+const ApiError = require('../utils/ApiError.js')
 const {signToken} = require('../utils/jwt.js')
 const User = require('../models/user.model')
 const asyncHandler = require('../utils/asyncHandler.js')
@@ -26,13 +26,13 @@ const login = asyncHandler(async(req, res)=>{
     const {email, password} = req.body ?? {}
 
     if (!email || !password){
-        throw apiError.badRequest('email and password are required')
+        throw ApiError.badRequest('email and password are required')
     }
     const user = await User.findOne({email: String(email).toLowerCase().trim()}).select('+password')
     // .select('+password') overrides the hashing
 
     if ((!user) || !(await user.comparePassword(password))){
-        throw apiError.unauthenticated('Invalid email or password')
+        throw ApiError.unauthenticated('Invalid email or password')
     }
     // making sure that the user exists and the passwords match
 

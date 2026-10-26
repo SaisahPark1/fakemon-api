@@ -3,7 +3,7 @@
 const asyncHandler = require('../utils/asyncHandler')
 const {sendSuccess, sendCreated, sendNoContent} = require('../utils/apiResponse')
 const Fakemon = require('../models/fakemon.model')
-const apiError = require('../utils/apiError')
+const ApiError = require('../utils/ApiError.js')
 const {parsePagination, parseSort, buildMeta, buildFakemonFilter} = require('../utils/queryFeatures.js')
 
 const WRITABLE_FIELDS = ["name", 'types', 'image', 'description']
@@ -35,9 +35,10 @@ const getFakemonStats = asyncHandler(async(req, res)=>{
 const getAllFakemon = asyncHandler(async(req, res)=>{
     /** Stage 1: pagination, features: sorting, filtering
      * 
-     * each helper function should throw a 400 apiError on bad inputs and the asyncHandler forwards to the errorHandler so this handles all forms of error
+     * each helper function should throw a 400 ApiError on bad inputs and the asyncHandler forwards to the errorHandler so this handles all forms of error
       */
     const filter = buildFakemonFilter(req.query)
+    console.log(filter)
     const sort = parseSort(req.query.sort)
     const {page, limit, skip} = parsePagination(req.query)
 
@@ -53,7 +54,7 @@ const getAllFakemon = asyncHandler(async(req, res)=>{
 // GET /api/v1/fakemon/:id
 const getOneFakemon = asyncHandler(async(req, res)=>{
     const fakemon = await Fakemon.findById(req.params.id)
-    if(!fakemon) throw apiError.notFound('Fakemon not Found')
+    if(!fakemon) throw ApiError.notFound('Fakemon not Found')
     sendSuccess(res, fakemon)
 })
 
@@ -72,14 +73,14 @@ const updateFakemon = asyncHandler(async(req, res) => {
     const fakemon = await Fakemon.findByIdAndUpdate(req.params.id, req.body, {
         new:true, runValidators: true
     })
-    if (!fakemon) throw apiError.notFound('Fakemon not Found')
+    if (!fakemon) throw ApiError.notFound('Fakemon not Found')
     sendSuccess(res, fakemon)
 })
 
 // DELETE /api/v1/fakemon/:id
 const removeFakemon = asyncHandler(async(req, res) => {
     const fakemon = await Fakemon.findByIdAndDelete(req.params.id)
-    if (!fakemon) throw apiError.notFound('Fakemon not Found')
+    if (!fakemon) throw ApiError.notFound('Fakemon not Found')
     sendNoContent(res)
 })
 

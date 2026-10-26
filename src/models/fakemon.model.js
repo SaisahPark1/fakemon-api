@@ -25,7 +25,7 @@ const fakemonSchema = new mongoose.Schema({
     likes: {type: Number, default: 0},
     flags: {type: Number, default: 0},
     deletedAt: {type: Date, default: null},
-    ownerId: {type: String, default: "N/A", required: true}
+    ownerId: {type: String, required: true}
 },{timestamps: true})
 
 module.exports = mongoose.model('Fakemon', fakemonSchema)

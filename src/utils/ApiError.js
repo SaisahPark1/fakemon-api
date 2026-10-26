@@ -1,4 +1,4 @@
-class apiError extends Error{
+class ApiError extends Error{
     constructor(statusCode, message, details = null){
         super(message)
         this.statusCode = statusCode
@@ -15,28 +15,28 @@ class apiError extends Error{
      * This also sets a basis for stage 3
      */
     static badRequest(message = 'Bad Request', details = null){
-        return new apiError(400, message, details)
+        return new ApiError(400, message, details)
     }
 
     // 401: We don't know you. Log in please
     static unauthenticated(message = 'Unauthenticated', details = null){
-        return new apiError(401, message, details)
+        return new ApiError(401, message, details)
     }
 
     // 403: We know you and you are forbidden
     static unauthorized(message = 'Unauthorized', details = null){
-        return new apiError(403, message, details)
+        return new ApiError(403, message, details)
     }
 
     // Basic 404
     static notFound(message = 'Not Found', details = null){
-        return new apiError(404, message, details)
+        return new ApiError(404, message, details)
     }
 
     // 409: There are conflicts with your request
     static conflity(message = 'Conflict', details = null){
-        return new apiError(409, message, details)
+        return new ApiError(409, message, details)
     }
 }
 
-module.exports = apiError
+module.exports = ApiError

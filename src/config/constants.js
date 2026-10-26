@@ -3,7 +3,7 @@ const TYPES = Object.freeze([
 ])
 
 const SORTABLE_FIELDS = Object.freeze([
-    'postedOn', 'name', 'likes', 'type'
+    'postedOn', 'name', 'likes'
 ])
 
 const PAGINATION = Object.freeze({

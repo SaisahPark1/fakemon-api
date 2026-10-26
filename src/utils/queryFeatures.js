@@ -12,7 +12,7 @@ const { query } = require('../app.js')
 */
 
 const {PAGINATION, SORTABLE_FIELDS, DEFAULT_SORT, TYPES} = require('../config/constants.js')
-const apiError = require('../utils/apiError.js')
+const ApiError = require('./ApiError.js')
 
 function parsePagination(query={}){
     const rawPage = Number.parseInt(query.page, 10)
@@ -32,26 +32,28 @@ function parsePagination(query={}){
  * 
  * @param {string} [sortParam] req.query.sort
  * @returns {object} a Mongoose sort object
- * @throws {apiError} 400 when a field is not sortable
+ * @throws {ApiError} 400 when a field is not sortable
  */
 
 function parseSort(sortParam){
     if(!sortParam || typeof sortParam !== 'string') return {...DEFAULT_SORT}
 
     const sort = {}
+    let name
+    let descending
 
     for(const rawField of sortParam.split(',')){
         const field = rawField.trim()
         if (!field) continue
-        const descending = field.startsWith('-')
-        const name = descending ? field.slice(1) : field
+        descending = field.startsWith('-')
+        name = descending ? field.slice(1) : field
     }
 
     if (!SORTABLE_FIELDS.includes(name)){
-        throw apiError.badRequest(`Cannot sort by '${name}' Sortable Fields: ${SORTABLE_FIELDS.join(', ')}`)
+        throw ApiError.badRequest(`Cannot sort by '${name}' Sortable Fields: ${SORTABLE_FIELDS.join(', ')}`)
     }
     // Checks to see the field name given is allowed
-    sort['name'] = descending ? -1: 1
+    sort[name] = descending ? -1: 1
 
     return Object.keys(sort).length > 0 ? sort : {...DEFAULT_SORT}
 }
@@ -90,10 +92,10 @@ function escapeRegex(text){
  * 
  * @param {object} query req.query
  * @returns {object} a filter object for Plant.find()
- * @throws {apiError}
+ * @throws {ApiError}
  */
 
-function buildFakemonFilter(query={}){
+function buildFakemonFilter(query){
     const filter = {}
     if(query.name){
         filter.name = query.name
@@ -101,7 +103,7 @@ function buildFakemonFilter(query={}){
     if (query.q){
         // 'i' is for case insensitive
         const pattern = new RegExp(escapeRegex(String(query.q).trim()), 'i')
-        filter.$or = [{nickname: pattern}, {species: pattern}]
+        filter.$or = [{name: pattern}]
     }
     return filter
 }

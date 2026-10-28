@@ -1,10 +1,11 @@
 const express = require('express')
 const routes = require('./routes')
 const healthRoutes = require('./routes/health.routes')
-const requestLogger = require('./middleware/requestLogger')
+const requestLogger = require('./middleware/requestLogger.js')
 const notFound = require('./middleware/notFound')
 const errorHandler = require('./middleware/errorHandler')
 const { API_PREFIX } = require('./config/constants')
+const cors = require('cors')
 
 /**
  * This will build the express application and start the base database connection and application
@@ -15,6 +16,9 @@ const { API_PREFIX } = require('./config/constants')
 
 const app = express()
 // REMEMBER: ORDER MATTERS
+app.use(cors({
+    origin: 'http://127.0.0.1:5500'
+}));
 
 app.use(requestLogger)
 app.use(express.json({limit: '10kb'}))

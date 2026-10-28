@@ -38,7 +38,6 @@ const getAllFakemon = asyncHandler(async(req, res)=>{
      * each helper function should throw a 400 ApiError on bad inputs and the asyncHandler forwards to the errorHandler so this handles all forms of error
       */
     const filter = buildFakemonFilter(req.query)
-    console.log(filter)
     const sort = parseSort(req.query.sort)
     const {page, limit, skip} = parsePagination(req.query)
 
@@ -70,8 +69,8 @@ const createFakemon = asyncHandler(async(req, res) => {
 
 // PUT+PATCH /api/v1/fakemon/:id
 const updateFakemon = asyncHandler(async(req, res) => {
-    const fakemon = await Fakemon.findByIdAndUpdate(req.params.id, req.body, {
-        new:true, runValidators: true
+    const fakemon = await Fakemon.findByIdAndUpdate(req.params.id, pickWritableFields(req.body), {
+        returnDocument: 'after', runValidators: true
     })
     if (!fakemon) throw ApiError.notFound('Fakemon not Found')
     sendSuccess(res, fakemon)

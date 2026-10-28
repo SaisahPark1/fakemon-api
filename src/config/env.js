@@ -14,7 +14,7 @@ module.exports = {
     port: Number(process.env.PORT),
     mongoUri: process.env.MONGODB_URI,
     isProduction: process.env.NODE_ENV === "productions",
-    isTest: process.env.NODE_ENV === 'test' || 'test',
+    isTest: process.env.NODE_ENV === 'test',
     jwtSecret: process.env.JWT_SECRET,
     jwtExpiresIn: process.env.JWT_EXPIRES_IN || AUTH.DEFAULT_JWT_EXPIRES_IN
 }

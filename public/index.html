@@ -13,19 +13,19 @@
         <button id="create" class="unpressed">Post your own!</button>
         <button id="creations" class="unpressed">View your own creations!</button>
     </div>
-    <select>
-        <option value="date1">Date Newest</option>
-        <option value="date-1">Date Oldest</option>
-        <option value="liked1">Most liked</option>
-        <option value="liked-1">Least liked I guess</option>
+    <select id="sort">
+        <option value="-postedOn">Date Newest</option>
+        <option value="postedOn">Date Oldest</option>
+        <option value="-likes">Most liked</option>
+        <option value="likes">Least liked I guess</option>
     </select>
 
     <div class="container visible" id="fakemon-holder">
-        <div class="card" id="fakemon">
+        <div class="card" id="fakemon-example">
             <img src="" alt="fakemon-image" id="image">
             <h2 id="name">example</h2>
         </div>
-        <div id="no-fakemon">
+        <div id="no-content">
             <h1>Uh-Oh! No fakemon yet!</h1>
         </div>
     </div>

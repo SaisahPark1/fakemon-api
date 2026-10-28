@@ -1,3 +1,3 @@
 import { loadStuff } from './shared.js'
 
-loadStuff('/fakemon/favorites')
+loadStuff('http://localhost:5500/fakemon/favorites')

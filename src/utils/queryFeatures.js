@@ -100,10 +100,13 @@ function buildFakemonFilter(query){
     if(query.name){
         filter.name = query.name
     }
+    if(query.ownerId){
+        filter.ownerId = query.ownerId
+    }
     if (query.q){
         // 'i' is for case insensitive
         const pattern = new RegExp(escapeRegex(String(query.q).trim()), 'i')
-        filter.$or = [{name: pattern}]
+        filter.$or = [{name: pattern}, {ownerId: pattern}]
     }
     return filter
 }

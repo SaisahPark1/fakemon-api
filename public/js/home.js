@@ -5,4 +5,4 @@ document.getElementById('sort').addEventListener('change', (event) => {
     loadStuff('http://localhost:5500/api/v1/fakemon?sort='+selectedValue)
 });
 
-loadStuff('http://localhost:5500/api/v1/fakemon?sort=postedOn')
+loadStuff('http://localhost:5500/api/v1/fakemon?sort=-postedOn')

@@ -14,6 +14,9 @@ const cors = require('cors')
  * logger -> bodyparser -> health -> API Routes -> 404 -> Error Handler
  */
 
+// const path = require('path')
+// app.use(express.static(path.join(__dirname, '../public')));
+
 const app = express()
 // REMEMBER: ORDER MATTERS
 app.use(cors({

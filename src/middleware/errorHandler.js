@@ -55,7 +55,7 @@ module.exports = function errorHandler(err, req, res, next){
     if (statusCode >= 500) console.log('[error]', {message: err.message, stack: err.stack})
 
     res.status(statusCode).json({
-        succes: false,
+        success: false,
         error:{
             message,
             ...(details && details),

@@ -1,4 +1,4 @@
-export async function loadStuff(route){
+async function loadStuff(route){
     const res = await fetch(route)
     if (!res.ok) throw new Error(`Request failed: ${res.status}`)
 
@@ -38,9 +38,11 @@ export async function loadStuff(route){
         console.log("Fakemon Loaded: "+mon.name)
 
         document.getElementById(mon._id).addEventListener("click", function() {
-            loadFakemonPage(mon.id)
+            window.location.href = `/public/showcase.html?id=${mon._id}`;
         });
     }
     example.style.visibility = 'hidden';
     example.style.position = 'absolute';
 }
+
+export {loadStuff}
